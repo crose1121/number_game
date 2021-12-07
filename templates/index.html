@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static\style.css">
+    <title>Number Game</title>
+</head>
+<body>
+    <h1>Welcome to the Great Number Game!!!</h1>
+    <h3>I am thinking of a number between 1 and 100. Think you can guess what it is?</h3>
+    {% if session.color %} <!-- if session.color = if 'color' in session -->
+    <div class="container" style="background-color: {{session.color}}">
+        <p>{{session.message}}</p>
+        {% if session.playing == False: %}
+        <form action="/destroy" method='post'>
+            <input type="submit" value="Play Again?" name="" id=""><!-- name attribute not required -->
+        </form>
+        {% endif %}
+    </div>
+    {% endif %}
+    {% if session.playing == True: %}
+    <form action="/guess" method='post'>
+        <input type="number" name='number'><!-- 'number' is a key in request.form -->
+        <input type="submit" value="Pick a Number" name="" id=""><!-- name attribute not required -->
+    </form>
+    {% endif %}
+</body>
+</html>
